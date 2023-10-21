@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Webcam {% endblock %}
+{% block content %}
+    <h1>Webcam Stream Django</h1>
+    <video id="webcam" autoplay></video>
+    <button id="capture-btn">Capture Picture</button>
+    {% csrf_token %}
+
+
+    <button id="recognize-btn">Recognize</button>
+
+
+
+    <canvas id="snapshot" style="display: none;"></canvas>
+    <img id="captured-image" style="display: none;">
+
+
+    <p id="recognition-result">Recognition result will be displayed here</p>
+
+    <script src="{% static 'scripts/webcam.js' %}"></script>
+{% endblock %}
