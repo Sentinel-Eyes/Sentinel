@@ -17,11 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from app import views
-
 urlpatterns = [
-    path("", views.home, name="home"),
-    path("webcam/", views.webcam, name="webcam"),
-    path("facial_recognition/", views.facial_recognition, name="facial_recognition"),
     path('admin/', admin.site.urls),
 ]
