@@ -1,17 +1,16 @@
 let captureInterval;
 $(document).ready(function () {
-    // Start the capture interval immediately
+    // Set up the interval to capture frames every 25 seconds
     startCaptureInterval();
 });
 
 function startCaptureInterval() {
-    // Capture a frame and send for recognition initially
-    captureFrame();
-
-    // Set up the interval to capture frames every 25 seconds
-    captureInterval = setInterval(function () {
+    // Delay the initial frame capture and recognition by 2 seconds
+    setTimeout(function () {
         captureFrame();
-    }, 15000);
+        // Set up the interval to capture frames every 15 seconds
+        captureInterval = setInterval(captureFrame, 15000);
+    }, 3000);
 }
 
 function captureFrame() {
