@@ -22,10 +22,10 @@ from django.urls import path
 from app import views
 
 urlpatterns = [
-    path('', views.home, name="home"),
+    path('', views.camera_feed, name="camera_feed"),
     path('live_feed/', views.live_feed, name='live_feed'),
     path('capture_frame/', views.capture_frame, name='capture_frame'),
-    path('camera_feed/', views.camera_feed, name='camera_feed'),
+    # path('camera_feed/', views.camera_feed, name='camera_feed'),
     path('face_recognition/', views.face_recognition, name='face_recognition'),
     path('admin/', admin.site.urls),
 ]
