@@ -12,20 +12,20 @@
         <div class="d-flex flex-column align-items-end">
             <img id="captured-frame" style="display: none;">
         </div>
-        <div>
-            <img id="criminal-image">
 
-        </div>
     </div>
-    <div class="pb-2">
-        <button type="button" class="btn btn-primary" id="capture-frame">Capture Frame</button>
-        <button type="button" class="btn btn-primary" id="send-frame">Send Frame</button>
+    <div>
+        <img id="criminal-image">
 
+    </div>
+    <div>
+        <p id="verified">Verification: </p>
+        <p id="distance">Distance: </p>
+        <p id="identity">Identity: </p>
     </div>
 
     <script>
         const capturedFrame = document.getElementById("captured-frame");
-        const sendButton = document.getElementById("send-frame");
         const criminalImage = document.getElementById("criminal-image");
         const csrfToken = '{{ csrf_token|escapejs }}';
     </script>
