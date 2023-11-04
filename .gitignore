@@ -1,2 +1,2 @@
-#Ignore pycache
+.idea
 __pycache__
