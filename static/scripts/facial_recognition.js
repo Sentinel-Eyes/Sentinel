@@ -13,7 +13,7 @@ function startCaptureInterval() {
     setTimeout(function () {
         captureFrame();
         // Set up the interval to capture frames every 15 seconds
-        captureInterval = setInterval(captureFrame, 15000);
+        captureInterval = setInterval(captureFrame, 5000);
     }, 3000);
 }
 
