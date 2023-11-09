@@ -28,5 +28,6 @@ urlpatterns = [
     path('camera_feed/', views.camera_feed, name='camera_feed'),
     path('face_recognition/', views.face_recognition, name='face_recognition'),
     path('send_email/', views.send_email, name='send_email'),
+    # path('get_crminal_image/', views.get_criminal_image, name='get_criminal_image'),
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

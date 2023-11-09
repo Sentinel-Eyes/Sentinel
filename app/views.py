@@ -1,11 +1,12 @@
 import base64
+
 import os
 
 from deepface import DeepFace
 from django.shortcuts import render
 from django.http import StreamingHttpResponse, HttpResponse, JsonResponse
 from django.views.decorators import gzip
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from Sentinel import settings
 from app import camera
 from app.models import Criminal
@@ -92,15 +93,21 @@ def face_recognition(request):
         return HttpResponse(status=204)
 
 def send_email(requesst):
-    print(Criminal.full_name)
     for data in response_data:
         print(data['verified'])
+        path_parts = data["identity"].split("/")
+        criminal_name_parts= path_parts[-2].split("_")
+        criminal_name = ' '.join([part.capitalize() for part in criminal_name_parts])
         if data['verified']:
+            print(data["identity"])
             subject = 'Criminal Recognized'
-            message = f"A face has been recognized: {data['identity']}"
+            message = f"A face has been recognized: {criminal_name}"
             from_email = settings.EMAIL_HOST_USER
             recipient_list = [settings.EMAIL_HOST_USER]
-            print(message)
-            send_mail(subject, message, from_email, recipient_list)
+            
+            email = EmailMessage(subject, message, from_email, recipient_list)
+            email.attach_file(data['identity'])
+            email.send()
+            
             break
     return HttpResponse(status=200)

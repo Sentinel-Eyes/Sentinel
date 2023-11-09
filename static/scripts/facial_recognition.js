@@ -92,6 +92,7 @@ function sendFrameForRecognition(frameDataUrl) {
                 criminalImage.src = `data:image/jpeg;base64,${data[0].criminal_image}`;
                 criminalImage.style.display = 'block';
             }
+            send_email()
 
         },
         error: function (error) {
