@@ -5,7 +5,10 @@ from deepface import DeepFace
 from django.shortcuts import render
 from django.http import StreamingHttpResponse, HttpResponse, JsonResponse
 from django.views.decorators import gzip
+from django.core.mail import send_mail
+from Sentinel import settings
 from app import camera
+from app.models import Criminal
 
 
 # Create your views here.
@@ -40,7 +43,7 @@ def capture_frame(request):
 def camera_feed(request, *args, **kwargs):
     return render(request, 'camera_feed.html')
 
-
+response_data = []
 def face_recognition(request):
     frame_data = request.POST.get('frame')
 
@@ -57,7 +60,7 @@ def face_recognition(request):
                                      model_name="VGG-Face")
 
         identity = ""
-        response_data = []
+        # response_data = []
         for result in find_results:
             identity = result['identity'][0]
             identity = identity.replace("\\", "/")
@@ -87,3 +90,17 @@ def face_recognition(request):
 
     else:
         return HttpResponse(status=204)
+
+def send_email(requesst):
+    print(Criminal.full_name)
+    for data in response_data:
+        print(data['verified'])
+        if data['verified']:
+            subject = 'Criminal Recognized'
+            message = f"A face has been recognized: {data['identity']}"
+            from_email = settings.EMAIL_HOST_USER
+            recipient_list = [settings.EMAIL_HOST_USER]
+            print(message)
+            send_mail(subject, message, from_email, recipient_list)
+            break
+    return HttpResponse(status=200)

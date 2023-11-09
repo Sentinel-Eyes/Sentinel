@@ -27,5 +27,6 @@ urlpatterns = [
     path('capture_frame/', views.capture_frame, name='capture_frame'),
     path('camera_feed/', views.camera_feed, name='camera_feed'),
     path('face_recognition/', views.face_recognition, name='face_recognition'),
+    path('send_email/', views.send_email, name='send_email'),
     path('admin/', admin.site.urls),
 ]

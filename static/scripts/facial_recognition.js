@@ -99,3 +99,19 @@ function sendFrameForRecognition(frameDataUrl) {
         }
     });
 }
+
+function send_email(asd) {
+  currentRequest = $.ajax({
+    url: "/send_email/",
+    type: "GET",
+    headers: {
+      "X-CSRFToken": csrfToken,
+    },
+    success: function () {
+      console.log("send_email javascript");
+    },
+    error: function (error) {
+      console.error(error);
+    },
+  });
+}
