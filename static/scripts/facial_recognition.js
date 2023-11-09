@@ -2,8 +2,9 @@ let captureInterval;
 let currentRequest = null;
 let isLeavingPage = false;
 
-
+console.log("ASDAWD")
 $(document).ready(function () {
+    console.log("ASDAWD")
     // Set up the interval to capture frames every 25 seconds
     startCaptureInterval();
 });
@@ -13,7 +14,7 @@ function startCaptureInterval() {
     setTimeout(function () {
         captureFrame();
         // Set up the interval to capture frames every 15 seconds
-        captureInterval = setInterval(captureFrame, 5000);
+        captureInterval = setInterval(captureFrame, 15000);
     }, 3000);
 }
 
@@ -81,7 +82,13 @@ function sendFrameForRecognition(frameDataUrl) {
                 $('#verified').text('Verification: ' + data[0].verified);
                 $('#distance').text('Distance: ' + data[0].distance);
                 $('#identity').text('Identity: ' + data[0].identity);
-
+                $('#threshold').text('Threshold: ' + data[0].threshold);
+                $('#model').text('Model: ' + data[0].model);
+                $('#detector_backend').text('Detector Backend: ' + data[0].detector_backend);
+                $('#similarity_metric').text('Similarity Metric: ' + data[0].similarity_metric);
+                $('#facial_areas').text('Facial Areas: ' + data[0].facial_areas);
+                $('#time').text('Time: ' + data[0].time);
+                
                 criminalImage.src = `data:image/jpeg;base64,${data[0].criminal_image}`;
                 criminalImage.style.display = 'block';
             }

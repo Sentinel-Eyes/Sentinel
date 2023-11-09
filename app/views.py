@@ -1,7 +1,6 @@
 import base64
 import os
 
-import deepface.DeepFace
 from deepface import DeepFace
 from django.shortcuts import render
 from django.http import StreamingHttpResponse, HttpResponse, JsonResponse
@@ -54,8 +53,8 @@ def face_recognition(request):
         # Step 2: Find the most similar identity
         find_results = DeepFace.find(frame_data,
                                      db_path="criminal/database",
-                                     model_name="VGG-Face",
-                                     enforce_detection=False)
+                                     enforce_detection=False,
+                                     model_name="VGG-Face")
 
         identity = ""
         response_data = []
