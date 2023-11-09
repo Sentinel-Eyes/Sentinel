@@ -1,34 +1,66 @@
 {% extends "base.html" %}
 
 {% load static %}
-{% block title %} Shyntinel Eyes {% endblock %}
+{% block title %} Sentinel {% endblock %}
 {% block content %}
-    <h1>OpenCV Live Stream in Django</h1>
-
-    <div class="d-flex">
-        <div class="pb-5 ps-5">
-            <img src="{% url 'live_feed' %}" id="video-feed">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Live Video Feed
+                    </div>
+                    <div class="card-body">
+                        <img src="{% url 'live_feed' %}" id="video-feed" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Criminal Image
+                    </div>
+                    <div class="card-body">
+                        <img id="criminal-image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="d-flex flex-column align-items-end">
-            <img id="captured-frame" style="display: none;">
-        </div>
-        <div>
-            <img id="criminal-image">
-
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Captured Frame
+                    </div>
+                    <div class="card-body">
+                        <img id="captured-frame" style="display: none;" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Recognition Results
+                    </div>
+                    <div class="card-body">
+                        <p id="verified">Verification: </p>
+                        <p id="distance">Distance: </p>
+                        <p id="identity">Identity: </p>
+                        <p id="threshold">Threshold: </p>
+                        <p id="model">Model: </p>
+                        <p id="detector_backend">Detector_backend: </p>
+                        <p id="similarity_metric">Similarity_metic: </p>
+                        <p id="facial_areas">Facial_areas: </p>
+                        <p id="time">Time: </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="pb-2">
-        <button type="button" class="btn btn-primary" id="capture-frame">Capture Frame</button>
-        <button type="button" class="btn btn-primary" id="send-frame">Send Frame</button>
-
-    </div>
-
     <script>
         const capturedFrame = document.getElementById("captured-frame");
-        const sendButton = document.getElementById("send-frame");
         const criminalImage = document.getElementById("criminal-image");
         const csrfToken = '{{ csrf_token|escapejs }}';
     </script>
     <script src="{% static 'scripts/facial_recognition.js' %}"></script>
-
 {% endblock %}

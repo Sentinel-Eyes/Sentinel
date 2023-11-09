@@ -1,12 +1,15 @@
 import base64
+
 import os
 
-import deepface.DeepFace
 from deepface import DeepFace
 from django.shortcuts import render
 from django.http import StreamingHttpResponse, HttpResponse, JsonResponse
 from django.views.decorators import gzip
+from django.core.mail import EmailMessage
+from Sentinel import settings
 from app import camera
+from app.models import Criminal
 
 
 # Create your views here.
@@ -41,7 +44,7 @@ def capture_frame(request):
 def camera_feed(request, *args, **kwargs):
     return render(request, 'camera_feed.html')
 
-
+response_data = []
 def face_recognition(request):
     frame_data = request.POST.get('frame')
 
@@ -54,11 +57,11 @@ def face_recognition(request):
         # Step 2: Find the most similar identity
         find_results = DeepFace.find(frame_data,
                                      db_path="criminal/database",
-                                     model_name="VGG-Face",
-                                     enforce_detection=False)
+                                     enforce_detection=False,
+                                     model_name="VGG-Face")
 
         identity = ""
-        response_data = []
+        # response_data = []
         for result in find_results:
             identity = result['identity'][0]
             identity = identity.replace("\\", "/")
@@ -88,3 +91,23 @@ def face_recognition(request):
 
     else:
         return HttpResponse(status=204)
+
+def send_email(requesst):
+    for data in response_data:
+        print(data['verified'])
+        path_parts = data["identity"].split("/")
+        criminal_name_parts= path_parts[-2].split("_")
+        criminal_name = ' '.join([part.capitalize() for part in criminal_name_parts])
+        if data['verified']:
+            print(data["identity"])
+            subject = 'Criminal Recognized'
+            message = f"A face has been recognized: {criminal_name}"
+            from_email = settings.EMAIL_HOST_USER
+            recipient_list = [settings.EMAIL_HOST_USER]
+            
+            email = EmailMessage(subject, message, from_email, recipient_list)
+            email.attach_file(data['identity'])
+            email.send()
+            
+            break
+    return HttpResponse(status=200)
