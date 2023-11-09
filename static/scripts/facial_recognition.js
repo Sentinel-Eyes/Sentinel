@@ -90,7 +90,6 @@ function sendFrameForRecognition(frameDataUrl) {
         $("#similarity_metric").text(
           "Similarity Metric: " + data[0].similarity_metric
         );
-        $("#facial_areas").text("Facial Areas: " + data[0].facial_areas);
         $("#time").text("Time: " + data[0].time);
         criminalImage.src = `data:image/jpeg;base64,${data[0].criminal_image}`;
         criminalImage.style.display = "block";
@@ -103,7 +102,6 @@ function sendFrameForRecognition(frameDataUrl) {
         $("#model").text("Model: ");
         $("#detector_backend").text("Detector Backend: ");
         $("#similarity_metric").text("Similarity Metric: ");
-        $("#facial_areas").text("Facial Areas: ");
         $("#time").text("Time: ");
       }
     },
