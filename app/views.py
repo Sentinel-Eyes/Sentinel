@@ -61,31 +61,35 @@ def face_recognition(request):
                                      model_name="VGG-Face")
 
         identity = ""
-        # response_data = []
+        response_data.clear()
+
         for result in find_results:
-            identity = result['identity'][0]
-            identity = identity.replace("\\", "/")
+            try:
+                identity = result['identity'][0]
+                identity = identity.replace("\\", "/")
 
-            similar_faces = DeepFace.verify(frame_data, identity,
-                                            enforce_detection=False,
-                                            model_name="VGG-Face")
+                similar_faces = DeepFace.verify(frame_data, identity,
+                                                enforce_detection=False,
+                                                model_name="VGG-Face")
 
-            with open(identity, 'rb') as image_file:
-                # Base64 encode the image
-                image_base64 = base64.b64encode(image_file.read()).decode('utf-8')
+                with open(identity, 'rb') as image_file:
+                    # Base64 encode the image
+                    image_base64 = base64.b64encode(image_file.read()).decode('utf-8')
 
-            response_data.append({
-                'verified': bool(similar_faces['verified']),
-                'distance': similar_faces['distance'],
-                'threshold': similar_faces['threshold'],
-                'model': similar_faces['model'],
-                'detector_backend': similar_faces['detector_backend'],
-                'similarity_metric': similar_faces['similarity_metric'],
-                'facial_areas': similar_faces['facial_areas'],
-                'time': similar_faces['time'],
-                'identity': identity,
-                'criminal_image': image_base64
-            })
+                response_data.append({
+                    'verified': bool(similar_faces['verified']),
+                    'distance': similar_faces['distance'],
+                    'threshold': similar_faces['threshold'],
+                    'model': similar_faces['model'],
+                    'detector_backend': similar_faces['detector_backend'],
+                    'similarity_metric': similar_faces['similarity_metric'],
+                    'facial_areas': similar_faces['facial_areas'],
+                    'time': similar_faces['time'],
+                    'identity': identity,
+                    'criminal_image': image_base64
+                })
+            except:
+                print("Something went wrong.")
 
         return JsonResponse(response_data, safe=False)
 
@@ -94,7 +98,6 @@ def face_recognition(request):
 
 def send_email(requesst):
     for data in response_data:
-        print(data['verified'])
         path_parts = data["identity"].split("/")
         criminal_name_parts= path_parts[-2].split("_")
         criminal_name = ' '.join([part.capitalize() for part in criminal_name_parts])
@@ -104,10 +107,10 @@ def send_email(requesst):
             message = f"A face has been recognized: {criminal_name}"
             from_email = settings.EMAIL_HOST_USER
             recipient_list = [settings.EMAIL_HOST_USER]
-            
+
             email = EmailMessage(subject, message, from_email, recipient_list)
             email.attach_file(data['identity'])
             email.send()
-            
+
             break
     return HttpResponse(status=200)
