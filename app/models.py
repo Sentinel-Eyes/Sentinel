@@ -11,7 +11,7 @@ def criminal_image_upload_to(instance, filename):
                  f"{instance.Criminal.Criminal_Lastname}")
 
     # Create the dynamic upload path
-    return f"criminal/database/{full_name.lower()}/{filename}"
+    return f"static/criminal/database/{full_name.lower()}/{filename}"
 
 
 class Criminal(models.Model):
