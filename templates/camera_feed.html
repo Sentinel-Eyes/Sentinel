@@ -1,15 +1,15 @@
-{% extends "base.html" %} 
-{% load static %} 
-{% block title %} Sentinel {%endblock %} 
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block title %} Sentinel
+{%endblock %} {% block content %}
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-6">
       <div class="card">
         <div class="card-header">Live Video Feed</div>
         <div class="card-body">
-          <!-- <video id="video-feed" class="img-fluid" width="252" height="345" autoplay playsinline></video> -->
-          <img src="{% url 'live_feed' %}" id="video-feed" class="img-fluid" />
+          <p>video</p>
+          <video id="webcam" autoplay></video>
+
+          <!-- <img src="{% url 'live_feed' %}" id="video-feed" class="img-fluid" /> -->
         </div>
       </div>
     </div>
@@ -49,9 +49,23 @@
   </div>
 </div>
 <script>
+  const webcam = document.getElementById("webcam");
+  let stream;
+  if (navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then(function (stream) {
+        stream = stream;
+        webcam.srcObject = stream;
+      })
+      .catch(function (err) {
+        console.log("Something went wrong!");
+      });
+  }
+
   const capturedFrame = document.getElementById("captured-frame");
   const criminalImage = document.getElementById("criminal-image");
   const csrfToken = "{{ csrf_token|escapejs }}";
 </script>
-<script src="{% static 'scripts/facial_recognition.js' %}"></script>
+<!-- <script src="{% static 'scripts/facial_recognition.js' %}"></script> -->
 {% endblock %}
