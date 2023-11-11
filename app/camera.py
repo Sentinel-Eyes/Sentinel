@@ -1,10 +1,11 @@
 import threading
 import cv2
 
-#IP Camera
+# IP Camera
+url = "http://100.82.7.117:3636/video"
 class VideoCamera(object):
     def __init__(self):
-        self.video = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+        self.video = cv2.VideoCapture(url)
         self.face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
         self.lock = threading.Lock()  # Create a lock
         (self.grabbed, self.frame) = self.video.read()
