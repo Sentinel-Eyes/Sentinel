@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Sentinel.wsgi.app'
+WSGI_APPLICATION = 'Sentinel.wsgi.application'
 
 
 # Database
