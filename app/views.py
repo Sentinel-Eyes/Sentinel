@@ -3,45 +3,17 @@ import base64
 import os
 
 from deepface import DeepFace
-from django.shortcuts import render
-from django.http import StreamingHttpResponse, HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import redirect, render
 from django.views.decorators import gzip
-from app import camera
+from django.views.decorators.csrf import csrf_exempt
 from app.utils import send_email
 
 
 # Create your views here.
-@gzip.gzip_page
-def live_feed(request):
-    try:
-        cam = camera.VideoCamera()
-        return StreamingHttpResponse(camera.gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
-    except Exception as e:
-        print(e)
-
-
-def capture_frame(request):
-    cam = camera.VideoCamera()  # Create an instance of the VideoCamera
-    frame_without_rectangles = cam.get_detected_faces_frame()  # Get the frame without the rectangles
-    
-    if frame_without_rectangles:  # If a frame was captured
-        base64_frame = base64.b64encode(frame_without_rectangles).decode('utf-8')
-        print("Frame captured")
-        return HttpResponse(base64_frame, content_type="image/jpeg")
-
-    else:
-        # Return an empty response or handle it as needed
-        print("No frame captured")
-        return HttpResponse(status=204)
-
-
-def camera_feed(request, *args, **kwargs):
-    return render(request, 'camera_feed.html')
-
-
+@csrf_exempt
 def face_recognition(request):
     response_data = []
-
     frame_data = request.POST.get('frame')
 
     if frame_data is not None:
@@ -93,3 +65,11 @@ def face_recognition(request):
 
     else:
         return HttpResponse(status=204)
+    
+
+def home(request):
+    return redirect('http://localhost:5173')
+
+def vite(request):
+    target_url = "http://localhost:5173"
+    return render(request, target_url)
