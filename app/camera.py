@@ -2,7 +2,6 @@ import threading
 import cv2
 
 #IP Camera
-url = "http://100.73.144.107:3636/video" 
 class VideoCamera(object):
     def __init__(self):
         self.video = cv2.VideoCapture(0, cv2.CAP_DSHOW)
