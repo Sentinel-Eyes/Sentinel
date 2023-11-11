@@ -28,6 +28,7 @@ class Criminal(models.Model):
 
     def __str__(self):
         return self.full_name
+ 
 
 
 class CriminalImage(models.Model):
