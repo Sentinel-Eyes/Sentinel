@@ -26,8 +26,7 @@ SECRET_KEY = 'django-insecure-djoq$^nn-97#g3p^yek!7j&oq_gh9)k)whn1_)6vcoo5n#&(h$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ['*',".ngrok-free.app"]
 
 # Application definition
 
@@ -43,17 +42,21 @@ INSTALLED_APPS = [
 
 ]
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # Cors stuff
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "https://sentinel-client.onrender.com",
     "https://sentinel-eyes.github.io",
     "http://localhost:5173",
+    "https://a1c6-131-226-112-62.ngrok-free.app",
+
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://sentinel-client.onrender.com",
     "https://sentinel-eyes.github.io",
     "http://localhost:5173",
+    "https://a1c6-131-226-112-62.ngrok-free.app",
+
 ]
 
 CORS_ALLOW_HEADERS = [
@@ -104,23 +107,23 @@ WSGI_APPLICATION = 'Sentinel.wsgi.app'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'Fg*egc*Fde2ffg3Ea3B6BebcgeC*BA-5',
-        'HOST': 'viaduct.proxy.rlwy.net',
-        'PORT': '14569',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Fg*egc*Fde2ffg3Ea3B6BebcgeC*BA-5',
+#         'HOST': 'viaduct.proxy.rlwy.net',
+#         'PORT': '14569',
+#     }
+# }
 
 
 # Password validation
