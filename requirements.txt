@@ -1,6 +1,5 @@
 Django>=4.2.6
 deepface~=0.0.79
 django-cors-headers>=3.8.0
-whitenoise[brotli]>=6.0
-psycopg[c]; sys_platform == "linux"
-psycopg[binary]; sys_platform != "linux"
+psycopg2-binary>=2.9.1
+```
