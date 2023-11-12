@@ -68,9 +68,9 @@ def face_recognition(request):
 
 
 def home(request):
-    return redirect('https://sentinel-eyes.github.io/Sentinel-Client')
+    return redirect('https://sentinel-eyes.github.io')
 
 
 def vite(request):
-    target_url = "https://sentinel-eyes.github.io/Sentinel-Client"
+    target_url = "https://sentinel-eyes.github.io"
     return render(request, target_url)
