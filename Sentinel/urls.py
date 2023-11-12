@@ -17,14 +17,15 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from Sentinel import settings
+from django.conf.urls.static import static
 
 from app import views
 
 urlpatterns = [
-    path('', views.camera_feed, name='camera_feed'),
-    path('live_feed/', views.live_feed, name='live_feed'),
-    path('capture_frame/', views.capture_frame, name='capture_frame'),
+    path('', views.home, name='home'),
+    path('redirect/', views.vite, name='index'),
     path('face_recognition/', views.face_recognition, name='face_recognition'),
-    path('send_email/', views.send_email, name='send_email'),
     path('admin/', admin.site.urls),
 ]
+

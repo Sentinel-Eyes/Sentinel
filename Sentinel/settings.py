@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,8 +26,7 @@ SECRET_KEY = 'django-insecure-djoq$^nn-97#g3p^yek!7j&oq_gh9)k)whn1_)6vcoo5n#&(h$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.Sentinel.application', '.vercel.app', 'now.sh']
-
+ALLOWED_HOSTS = ['*',".ngrok-free.app"]
 
 # Application definition
 
@@ -37,18 +37,50 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "corsheaders",
     'app',
+
 ]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Cors stuff
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://sentinel-eyes.github.io",
+    "http://localhost:5173",
+    "https://a1c6-131-226-112-62.ngrok-free.app",
+
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://sentinel-eyes.github.io",
+    "http://localhost:5173",
+    "https://a1c6-131-226-112-62.ngrok-free.app",
+
+]
+
+CORS_ALLOW_HEADERS = [
+    "*"
+]
+
+CORS_ALLOW_METHODS = (
+    "*"
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',    
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# APPEND_SLASH = False
+
 
 ROOT_URLCONF = 'Sentinel.urls'
 
@@ -75,23 +107,23 @@ WSGI_APPLICATION = 'Sentinel.wsgi.app'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',                      
-        'USER': 'postgres',
-        'PASSWORD': 'Fg*egc*Fde2ffg3Ea3B6BebcgeC*BA-5',
-        'HOST': 'viaduct.proxy.rlwy.net',
-        'PORT': '14569',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Fg*egc*Fde2ffg3Ea3B6BebcgeC*BA-5',
+#         'HOST': 'viaduct.proxy.rlwy.net',
+#         'PORT': '14569',
+#     }
+# }
 
 
 # Password validation
@@ -127,12 +159,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+WHITENOISE_USE_FINDERS = True
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
