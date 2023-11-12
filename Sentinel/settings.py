@@ -46,12 +46,12 @@ INSTALLED_APPS = [
 # Cors stuff
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "https://sentinel-eyes.github.io/Sentinel-Client/",
-    "http://localhost:5173/",
+    "https://sentinel-eyes.github.io/Sentinel-Client",
+    "http://localhost:5173",
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173/",
-    "https://sentinel-eyes.github.io/Sentinel-Client/"
+    "http://localhost:5173",
+    "https://sentinel-eyes.github.io/Sentinel-Client"
 ]
 
 MIDDLEWARE = [
