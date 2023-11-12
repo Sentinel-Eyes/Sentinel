@@ -50,12 +50,15 @@ CORS_ALLOWED_ORIGINS = [
     "https://sentinel-eyes.github.io",
     "http://localhost:5173",
     "https://a1c6-131-226-112-62.ngrok-free.app",
+    "https://gorgeous-bengal-innocent.ngrok-free.app",
 
 ]
 CSRF_TRUSTED_ORIGINS = [
     "https://sentinel-eyes.github.io",
     "http://localhost:5173",
     "https://a1c6-131-226-112-62.ngrok-free.app",
+    "https://gorgeous-bengal-innocent.ngrok-free.app",
+
 
 ]
 
