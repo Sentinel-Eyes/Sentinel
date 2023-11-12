@@ -5,8 +5,8 @@ import os
 from deepface import DeepFace
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
-from django.views.decorators import gzip
 from django.views.decorators.csrf import csrf_exempt
+
 from app.utils import send_email
 
 
@@ -55,7 +55,7 @@ def face_recognition(request):
                     'identity': identity,
                     'criminal_image': image_base64
                 })
-             
+
             except:
                 print("Something went wrong.")
 
@@ -65,10 +65,11 @@ def face_recognition(request):
 
     else:
         return HttpResponse(status=204)
-    
+
 
 def home(request):
     return redirect('http://localhost:5173')
+
 
 def vite(request):
     target_url = "http://localhost:5173"
