@@ -45,14 +45,20 @@ INSTALLED_APPS = [
 
 # Cors stuff
 CORS_ALLOW_ALL_ORIGINS = True
-
-CSRF_TRUSTED_ORIGINS = ["http://localhost:5173"]
+CORS_ALLOWED_ORIGINS = [
+    "https://sentinel-eyes.github.io/Sentinel-Client/",
+    "http://localhost:5173/",
+]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173/",
+    "https://sentinel-eyes.github.io/Sentinel-Client/"
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    "corsheaders.middleware.CorsMiddleware",   
+    "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    'django.contrib.sessions.middleware.SessionMiddleware', 
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -61,8 +67,6 @@ MIDDLEWARE = [
 ]
 
 # APPEND_SLASH = False
-
-
 
 
 ROOT_URLCONF = 'Sentinel.urls'
@@ -100,7 +104,7 @@ WSGI_APPLICATION = 'Sentinel.wsgi.app'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',                      
+        'NAME': 'railway',
         'USER': 'postgres',
         'PASSWORD': 'Fg*egc*Fde2ffg3Ea3B6BebcgeC*BA-5',
         'HOST': 'viaduct.proxy.rlwy.net',
@@ -145,7 +149,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
