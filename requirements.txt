@@ -1,7 +1,6 @@
-Django~=4.2.6
+Django>=4.2.6
 deepface~=0.0.79
-gunicorn~=21.2.0
-numpy~=1.26.1
+django-cors-headers~ >=3.8.0
 whitenoise[brotli]>=6.0
 psycopg[c]; sys_platform == "linux"
 psycopg[binary]; sys_platform != "linux"
