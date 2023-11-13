@@ -74,3 +74,9 @@ def home(request):
 def vite(request):
     target_url = "https://sentinel-eyes.github.io/Sentinel-Client"
     return render(request, target_url)
+
+def server_status(request):
+    if request.method == 'GET':
+        return HttpResponse(status=200)
+    else:
+        return JsonResponse({'status': 'success'})
