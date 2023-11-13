@@ -51,6 +51,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "https://a1c6-131-226-112-62.ngrok-free.app",
     "https://gorgeous-bengal-innocent.ngrok-free.app",
+    "https://climbing-smashing-grouse.ngrok-free.app",
+    
 
 ]
 CSRF_TRUSTED_ORIGINS = [
@@ -58,6 +60,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
     "https://a1c6-131-226-112-62.ngrok-free.app",
     "https://gorgeous-bengal-innocent.ngrok-free.app",
+    "https://climbing-smashing-grouse.ngrok-free.app",
 
 
 ]
