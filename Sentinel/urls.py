@@ -26,6 +26,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('redirect/', views.vite, name='index'),
     path('face_recognition/', views.face_recognition, name='face_recognition'),
+    path('server_status/', views.server_status, name='server_status'),
     path('admin/', admin.site.urls),
 ]
 

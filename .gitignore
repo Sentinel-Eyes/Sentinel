@@ -1,5 +1,7 @@
 .idea
 __pycache__
-db.sqlite3
 
 venv
+
+db.sqlite3
+static/criminal/database
