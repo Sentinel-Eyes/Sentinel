@@ -32,3 +32,12 @@ ngrok http 8000
 ```
 
 copy the forwarding url of ngrok
+
+
+after restarting ngrok, url will be different. you can configure a static domain in ngrok. here is the code for hosting it using a static domain name
+
+```
+ngrok http --domain=climbing-smashing-grouse.ngrok-free.app 8000
+```
+
+this is specific to the hoster's account
